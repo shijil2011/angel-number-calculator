@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { angelNumbersList } from "@/lib/angel-number-data"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://angel-number-calculator.vercel.app"
@@ -25,9 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Angel number meaning pages
-  const angelNumbers = ["111", "222", "333", "444", "555", "666", "777", "888", "999", "1010", "1111", "1212", "1234"]
-  const angelNumberPages = angelNumbers.map((number) => ({
+  // All angel number meaning pages
+  const angelNumberPages = angelNumbersList.map((number) => ({
     url: `${baseUrl}/angel-numbers/${number}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
