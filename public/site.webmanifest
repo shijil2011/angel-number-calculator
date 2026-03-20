@@ -1,0 +1,21 @@
+{
+    "name": "Angel Number Calculator",
+    "short_name": "Angel Calc",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.jpg",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.jpg",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/",
+    "description": "Free angel number calculator - discover your personal angel numbers with detailed meanings and spiritual guidance."
+}
