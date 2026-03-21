@@ -300,6 +300,8 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
 
             <Separator />
 
+            <Separator />
+
             {/* FAQ */}
             <section id="faq">
               <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
@@ -315,6 +317,32 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                   </Card>
                 ))}
               </div>
+            </section>
+
+            <Separator />
+
+            {/* References Section */}
+            <section id="references">
+              <h2 className="text-2xl font-bold mb-4">Further Reading & Resources</h2>
+              <Card>
+                <CardContent className="pt-6">
+                  <p className="text-muted-foreground mb-4">
+                    To learn more about the foundations of numerology and its historical significance, you may find these resources helpful:
+                  </p>
+                  <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                    <li>
+                      <Link href="https://en.wikipedia.org/wiki/Numerology" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                        Numerology (Wikipedia)
+                      </Link> - An overview of the history and mathematical concepts behind numerological systems.
+                    </li>
+                    <li>
+                      <Link href="/" className="text-primary hover:underline">
+                        Angel Number Calculator
+                      </Link> - Use our internal tool to calculate your personal angel numbers based on your birthdate.
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             </section>
 
             {/* Call to Action */}
