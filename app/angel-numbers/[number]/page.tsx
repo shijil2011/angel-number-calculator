@@ -14,6 +14,22 @@ interface PageProps {
   }
 }
 
+// Auto-link helper to inject internal links naturally
+function AutoLinkContent({ text }: { text: string }) {
+  const parts = text.split(/(\bangel number \d{3,4}\b|\b\d{3,4}\b)/gi);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = part.match(/\b(\d{3,4})\b/);
+        if (match && angelNumbersList.includes(match[1])) {
+          return <Link key={i} href={`/angel-numbers/${match[1]}`} className="text-primary font-medium hover:underline">{part}</Link>;
+        }
+        return part;
+      })}
+    </>
+  );
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const meaning = angelNumberData[params.number as keyof typeof angelNumberData]
 
@@ -171,7 +187,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
               <h2 className="text-3xl font-bold mb-6">Complete Meaning of Angel Number {meaning.number}</h2>
               <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
                 {meaning.expandedMeaning.split("\n\n").map((paragraph: string, index: number) => (
-                  <p key={index} className="mb-4">{paragraph}</p>
+                  <p key={index} className="mb-4"><AutoLinkContent text={paragraph} /></p>
                 ))}
               </div>
             </section>
@@ -184,7 +200,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                 <Sparkles className="h-6 w-6 text-primary" />
                 Spiritual Significance
               </h2>
-              <p className="text-muted-foreground leading-relaxed">{meaning.spiritualSignificance}</p>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.spiritualSignificance} /></p>
             </section>
 
             <Separator />
@@ -195,7 +211,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                 <Heart className="h-6 w-6 text-primary" />
                 Love & Relationships
               </h2>
-              <p className="text-muted-foreground leading-relaxed">{meaning.loveAndRelationships}</p>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.loveAndRelationships} /></p>
             </section>
 
             <Separator />
@@ -206,7 +222,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                 <Zap className="h-6 w-6 text-primary" />
                 Career & Money
               </h2>
-              <p className="text-muted-foreground leading-relaxed">{meaning.careerAndMoney}</p>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.careerAndMoney} /></p>
             </section>
 
             <Separator />
@@ -221,7 +237,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                       {meaning.practicalActions.map((action: string, index: number) => (
                         <li key={index} className="flex items-start gap-3">
                           <Star className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                          <span className="text-muted-foreground">{action}</span>
+                          <span className="text-muted-foreground"><AutoLinkContent text={action} /></span>
                         </li>
                       ))}
                     </ul>
@@ -237,7 +253,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                       {meaning.manifestationTips.map((tip: string, index: number) => (
                         <li key={index} className="flex items-start gap-3">
                           <Sparkles className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                          <span className="text-muted-foreground">{tip}</span>
+                          <span className="text-muted-foreground"><AutoLinkContent text={tip} /></span>
                         </li>
                       ))}
                     </ul>
@@ -256,7 +272,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                   <div className="grid md:grid-cols-2 gap-4">
                     {meaning.affirmations.map((affirmation: string, index: number) => (
                       <div key={index} className="p-4 bg-muted/50 rounded-lg">
-                        <p className="text-muted-foreground italic">"{affirmation}"</p>
+                        <p className="text-muted-foreground italic">"<AutoLinkContent text={affirmation} />"</p>
                       </div>
                     ))}
                   </div>
@@ -271,7 +287,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold mb-4">When You See {meaning.number}</h2>
               <Card>
                 <CardContent className="pt-6">
-                  <p className="text-muted-foreground leading-relaxed">{meaning.whenYouSee}</p>
+                  <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.whenYouSee} /></p>
                 </CardContent>
               </Card>
             </section>
@@ -283,7 +299,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold mb-4">Numerology Breakdown</h2>
               <Card>
                 <CardContent className="pt-6">
-                  <p className="text-muted-foreground leading-relaxed">{meaning.numerologyBreakdown}</p>
+                  <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.numerologyBreakdown} /></p>
                   <div className="mt-4">
                     <h4 className="font-semibold mb-2">Related Numbers:</h4>
                     <div className="flex flex-wrap gap-2">
@@ -300,8 +316,6 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
 
             <Separator />
 
-            <Separator />
-
             {/* FAQ */}
             <section id="faq">
               <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
@@ -309,40 +323,14 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                 {meaning.commonQuestions.map((qa: { question: string; answer: string }, index: number) => (
                   <Card key={index}>
                     <CardHeader>
-                      <CardTitle className="text-lg">{qa.question}</CardTitle>
+                      <CardTitle className="text-lg"><AutoLinkContent text={qa.question} /></CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">{qa.answer}</p>
+                      <p className="text-muted-foreground"><AutoLinkContent text={qa.answer} /></p>
                     </CardContent>
                   </Card>
                 ))}
               </div>
-            </section>
-
-            <Separator />
-
-            {/* References Section */}
-            <section id="references">
-              <h2 className="text-2xl font-bold mb-4">Further Reading & Resources</h2>
-              <Card>
-                <CardContent className="pt-6">
-                  <p className="text-muted-foreground mb-4">
-                    To learn more about the foundations of numerology and its historical significance, you may find these resources helpful:
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                    <li>
-                      <Link href="https://en.wikipedia.org/wiki/Numerology" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                        Numerology (Wikipedia)
-                      </Link> - An overview of the history and mathematical concepts behind numerological systems.
-                    </li>
-                    <li>
-                      <Link href="/" className="text-primary hover:underline">
-                        Angel Number Calculator
-                      </Link> - Use our internal tool to calculate your personal angel numbers based on your birthdate.
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
             </section>
 
             {/* Call to Action */}
