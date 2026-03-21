@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Sparkles, ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { angelNumberData } from "@/lib/angel-number-data"
 
 export const metadata: Metadata = {
   title: "Angel Number Meanings | Complete Guide to Angel Numbers",
@@ -18,100 +19,14 @@ export const metadata: Metadata = {
   ],
 }
 
-const angelNumbers = [
-  {
-    number: "111",
-    title: "New Beginnings & Manifestation",
-    description:
-      "A powerful sign of new beginnings and manifestation power. Your thoughts are rapidly becoming reality.",
-    color: "bg-blue-500",
-    category: "Manifestation",
-  },
-  {
-    number: "222",
-    title: "Balance & Divine Timing",
-    description: "Trust in divine timing and seek balance in all areas of your life. Cooperation and harmony are key.",
-    color: "bg-green-500",
-    category: "Balance",
-  },
-  {
-    number: "333",
-    title: "Creativity & Growth",
-    description: "Express your creativity and embrace spiritual growth. The ascended masters are supporting you.",
-    color: "bg-purple-500",
-    category: "Creativity",
-  },
-  {
-    number: "444",
-    title: "Stability & Protection",
-    description: "Build strong foundations and trust in divine protection. Your hard work will pay off.",
-    color: "bg-orange-500",
-    category: "Stability",
-  },
-  {
-    number: "555",
-    title: "Change & Freedom",
-    description: "Major life changes are coming. Embrace transformation and personal freedom.",
-    color: "bg-red-500",
-    category: "Change",
-  },
-  {
-    number: "666",
-    title: "Balance & Nurturing",
-    description: "Focus on nurturing yourself and others. Seek balance between material and spiritual worlds.",
-    color: "bg-pink-500",
-    category: "Nurturing",
-  },
-  {
-    number: "777",
-    title: "Spiritual Awakening",
-    description: "You're on the right spiritual path. Trust your intuition and inner wisdom.",
-    color: "bg-indigo-500",
-    category: "Spiritual",
-  },
-  {
-    number: "888",
-    title: "Abundance & Success",
-    description: "Financial abundance and material success are flowing into your life.",
-    color: "bg-yellow-500",
-    category: "Abundance",
-  },
-  {
-    number: "999",
-    title: "Completion & Service",
-    description: "A cycle is ending. Use your gifts to serve others and humanity.",
-    color: "bg-teal-500",
-    category: "Service",
-  },
-  {
-    number: "1010",
-    title: "New Cycle & Leadership",
-    description: "A new spiritual cycle is beginning. Step into your leadership role.",
-    color: "bg-cyan-500",
-    category: "Leadership",
-  },
-  {
-    number: "1111",
-    title: "Spiritual Portal",
-    description: "A powerful spiritual portal is open. Make a wish and trust in manifestation.",
-    color: "bg-violet-500",
-    category: "Portal",
-  },
-  {
-    number: "1212",
-    title: "Spiritual Growth",
-    description: "You're experiencing rapid spiritual growth and positive changes.",
-    color: "bg-rose-500",
-    category: "Growth",
-  },
-  {
-    number: "1234",
-    title: "Progressive Steps",
-    description: "Take things step by step. You're making steady progress toward your goals.",
-    color: "bg-emerald-500",
-    category: "Progress",
-  },
-]
+// Get the first 12 numbers for display
+const displayNumbers = Object.values(angelNumberData).slice(0, 12).map(n => ({
+  number: n.number,
+  title: n.title.replace(n.number + " Angel Number Meaning — ", ""),
+  description: n.shortMeaning,
+  color: "bg-primary",
+  category: "Spiritual",
+}))
 
 const categories = ["All", "Manifestation", "Balance", "Creativity", "Stability", "Change", "Spiritual", "Abundance"]
 
@@ -181,7 +96,7 @@ export default function AngelNumbersPage() {
 
         {/* Angel Numbers Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {angelNumbers.map((angelNumber) => (
+          {displayNumbers.map((angelNumber) => (
             <Card key={angelNumber.number} className="hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
@@ -197,7 +112,7 @@ export default function AngelNumbersPage() {
               </CardHeader>
               <CardContent>
                 <Button variant="ghost" className="w-full justify-between group" asChild>
-                  <Link href={`/angel-numbers/${angelNumber.number}-meaning`}>
+                  <Link href={`/angel-numbers/${angelNumber.number}`}>
                     Read Full Meaning
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>

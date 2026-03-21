@@ -69,7 +69,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://angelnumberfinder.com/angel-numbers/${meaning.number}-meaning`,
+      "@id": `https://angel-number-calculator.vercel.app/angel-numbers/${meaning.number}`,
     },
     datePublished: "2024-01-01",
     dateModified: "2024-01-01",
