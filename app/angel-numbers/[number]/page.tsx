@@ -133,7 +133,7 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
             <div className="inline-flex items-center justify-center w-24 h-24 bg-primary text-primary-foreground rounded-full text-3xl font-bold mb-6">
               {meaning.number}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Angel Number {meaning.number}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Angel Number {meaning.number} Meaning & Significance</h1>
             <p className="text-xl text-muted-foreground mb-6 text-balance">{meaning.shortMeaning}</p>
             <div className="flex flex-wrap justify-center gap-2">
               <Badge variant="secondary">Spiritual Guidance</Badge>
