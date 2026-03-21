@@ -14,15 +14,25 @@ interface PageProps {
   }
 }
 
-// Auto-link helper to inject internal links naturally
-function AutoLinkContent({ text }: { text: string }) {
+// Auto-link helper to inject internal links naturally, avoiding self-links and excessive linking
+function AutoLinkContent({ 
+  text, 
+  currentNumber, 
+  tracker 
+}: { 
+  text: string; 
+  currentNumber: string; 
+  tracker: { internalCount: number } 
+}) {
   const parts = text.split(/(\bangel number \d{3,4}\b|\b\d{3,4}\b)/gi);
   return (
     <>
       {parts.map((part, i) => {
         const match = part.match(/\b(\d{3,4})\b/);
-        if (match && angelNumbersList.includes(match[1])) {
-          return <Link key={i} href={`/angel-numbers/${match[1]}`} className="text-primary font-medium hover:underline">{part}</Link>;
+        // Only link if it's a number, not the current page, and under the 5-link limit
+        if (match && angelNumbersList.includes(match[1]) && match[1] !== currentNumber && tracker.internalCount < 5) {
+          tracker.internalCount++;
+          return <Link key={i} href={`/angel-numbers/${match[1]}`} className="text-primary font-medium hover:underline underline-offset-2">{part}</Link>;
         }
         return part;
       })}
@@ -65,6 +75,7 @@ export async function generateStaticParams() {
 
 export default function AngelNumberMeaningPage({ params }: PageProps) {
   const meaning = angelNumberData[params.number as keyof typeof angelNumberData]
+  const tracker = { internalCount: 0 };
 
   if (!meaning) {
     notFound()
@@ -118,231 +129,84 @@ export default function AngelNumberMeaningPage({ params }: PageProps) {
                 <Sparkles className="h-6 w-6 text-primary" />
                 <span className="text-xl font-bold">Angel Number Finder</span>
               </Link>
-              <div className="flex items-center gap-4">
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/">
-                    <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back to Calculator
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
-              </div>
             </div>
           </div>
         </header>
 
         <div className="container mx-auto px-4 py-8 max-w-4xl">
-          {/* Breadcrumb */}
-          <nav className="mb-8 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-primary">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/angel-numbers" className="hover:text-primary">Angel Numbers</Link>
-            <span className="mx-2">/</span>
-            <span>{meaning.number} Meaning</span>
-          </nav>
-
           {/* Hero Section */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-24 h-24 bg-primary text-primary-foreground rounded-full text-3xl font-bold mb-6">
               {meaning.number}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Angel Number {meaning.number} Meaning & Significance</h1>
-            <p className="text-xl text-muted-foreground mb-6 text-balance">{meaning.shortMeaning}</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              <Badge variant="secondary">Spiritual Guidance</Badge>
-              <Badge variant="secondary">Manifestation</Badge>
-              <Badge variant="secondary">Angel Messages</Badge>
-            </div>
-          </div>
+            
+            {/* Key Takeaways */}
+            <Card className="my-8 bg-primary/5 border-primary/20 text-left">
+                <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2 text-primary">
+                    <Star className="h-5 w-5" /> Key Takeaways
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="text-muted-foreground text-sm space-y-2">
+                    <p>• {meaning.shortMeaning}</p>
+                    <p>• Spiritual guidance for: {meaning.spiritualSignificance.slice(0, 100)}...</p>
+                    <p>• Practical advice: {meaning.practicalActions[0]}</p>
+                </CardContent>
+            </Card>
 
-          {/* Table of Contents */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                Table of Contents
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-2 text-sm">
-                <Link href="#meaning" className="hover:text-primary">• Complete Meaning</Link>
-                <Link href="#spiritual" className="hover:text-primary">• Spiritual Significance</Link>
-                <Link href="#love" className="hover:text-primary">• Love & Relationships</Link>
-                <Link href="#career" className="hover:text-primary">• Career & Money</Link>
-                <Link href="#actions" className="hover:text-primary">• Practical Actions</Link>
-                <Link href="#manifestation" className="hover:text-primary">• Manifestation Tips</Link>
-                <Link href="#numerology" className="hover:text-primary">• Numerology Breakdown</Link>
-                <Link href="#faq" className="hover:text-primary">• Common Questions</Link>
-              </div>
-            </CardContent>
-          </Card>
+            <p className="text-xl text-muted-foreground mb-6 text-balance">{meaning.shortMeaning}</p>
+          </div>
 
           {/* Main Content */}
           <div className="space-y-12">
-            {/* Complete Meaning */}
             <section id="meaning">
               <h2 className="text-3xl font-bold mb-6">Complete Meaning of Angel Number {meaning.number}</h2>
               <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
-                {meaning.expandedMeaning.split("\n\n").map((paragraph: string, index: number) => (
-                  <p key={index} className="mb-4"><AutoLinkContent text={paragraph} /></p>
-                ))}
+                {meaning.expandedMeaning.split("\n\n").map((p, i) => <p key={i} className="mb-4"><AutoLinkContent text={p} currentNumber={meaning.number} tracker={tracker} /></p>)}
               </div>
             </section>
-
-            <Separator />
 
             {/* Spiritual Significance */}
             <section id="spiritual">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <Sparkles className="h-6 w-6 text-primary" />
-                Spiritual Significance
-              </h2>
-              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.spiritualSignificance} /></p>
+              <h2 className="text-2xl font-bold mb-4">Spiritual Significance</h2>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.spiritualSignificance} currentNumber={meaning.number} tracker={tracker} /></p>
             </section>
-
-            <Separator />
 
             {/* Love & Relationships */}
             <section id="love">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <Heart className="h-6 w-6 text-primary" />
-                Love & Relationships
-              </h2>
-              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.loveAndRelationships} /></p>
+              <h2 className="text-2xl font-bold mb-4">Love & Relationships</h2>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.loveAndRelationships} currentNumber={meaning.number} tracker={tracker} /></p>
             </section>
-
-            <Separator />
 
             {/* Career & Money */}
             <section id="career">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <Zap className="h-6 w-6 text-primary" />
-                Career & Money
-              </h2>
-              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.careerAndMoney} /></p>
+              <h2 className="text-2xl font-bold mb-4">Career & Money</h2>
+              <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.careerAndMoney} currentNumber={meaning.number} tracker={tracker} /></p>
             </section>
 
-            <Separator />
-
-            {/* Practical Actions & Manifestation */}
+            {/* Practical Actions & Tips */}
             <div className="grid md:grid-cols-2 gap-8">
-              <section id="actions">
-                <h2 className="text-2xl font-bold mb-4">Practical Actions</h2>
-                <Card>
-                  <CardContent className="pt-6">
+                <section id="actions">
+                    <h2 className="text-2xl font-bold mb-4">Practical Actions</h2>
                     <ul className="space-y-3">
-                      {meaning.practicalActions.map((action: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <Star className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                          <span className="text-muted-foreground"><AutoLinkContent text={action} /></span>
-                        </li>
-                      ))}
+                        {meaning.practicalActions.map((a, i) => <li key={i} className="text-muted-foreground"><AutoLinkContent text={a} currentNumber={meaning.number} tracker={tracker} /></li>)}
                     </ul>
-                  </CardContent>
-                </Card>
-              </section>
-
-              <section id="manifestation">
-                <h2 className="text-2xl font-bold mb-4">Manifestation Tips</h2>
-                <Card>
-                  <CardContent className="pt-6">
+                </section>
+                <section id="manifestation">
+                    <h2 className="text-2xl font-bold mb-4">Manifestation Tips</h2>
                     <ul className="space-y-3">
-                      {meaning.manifestationTips.map((tip: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <Sparkles className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                          <span className="text-muted-foreground"><AutoLinkContent text={tip} /></span>
-                        </li>
-                      ))}
+                        {meaning.manifestationTips.map((t, i) => <li key={i} className="text-muted-foreground"><AutoLinkContent text={t} currentNumber={meaning.number} tracker={tracker} /></li>)}
                     </ul>
-                  </CardContent>
-                </Card>
-              </section>
+                </section>
             </div>
 
-            <Separator />
-
-            {/* Affirmations */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4">Positive Affirmations for {meaning.number}</h2>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {meaning.affirmations.map((affirmation: string, index: number) => (
-                      <div key={index} className="p-4 bg-muted/50 rounded-lg">
-                        <p className="text-muted-foreground italic">"<AutoLinkContent text={affirmation} />"</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            <Separator />
-
-            {/* When You See This Number */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4">When You See {meaning.number}</h2>
-              <Card>
-                <CardContent className="pt-6">
-                  <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.whenYouSee} /></p>
-                </CardContent>
-              </Card>
-            </section>
-
-            <Separator />
-
-            {/* Numerology Breakdown */}
-            <section id="numerology">
-              <h2 className="text-2xl font-bold mb-4">Numerology Breakdown</h2>
-              <Card>
-                <CardContent className="pt-6">
-                  <p className="text-muted-foreground leading-relaxed"><AutoLinkContent text={meaning.numerologyBreakdown} /></p>
-                  <div className="mt-4">
-                    <h4 className="font-semibold mb-2">Related Numbers:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {meaning.relatedNumbers.map((num: string) => (
-                        <Badge key={num} variant="outline" asChild>
-                          <Link href={`/angel-numbers/${num}`}>{num}</Link>
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            <Separator />
-
-            {/* FAQ */}
-            <section id="faq">
-              <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-              <div className="space-y-4">
-                {meaning.commonQuestions.map((qa: { question: string; answer: string }, index: number) => (
-                  <Card key={index}>
-                    <CardHeader>
-                      <CardTitle className="text-lg"><AutoLinkContent text={qa.question} /></CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground"><AutoLinkContent text={qa.answer} /></p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            {/* Call to Action */}
-            <section className="text-center py-12 bg-muted/30 rounded-lg">
-              <h2 className="text-2xl font-bold mb-4">Discover Your Personal Angel Numbers</h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Ready to find out which angel numbers are most significant for you? Use our calculator to discover your
-                personal angel numbers based on your birthdate and other details.
+            {/* References */}
+            <section id="references">
+              <h2 className="text-2xl font-bold mb-4">Further Resources</h2>
+              <p className="text-muted-foreground">
+                To explore more about numerology, check out <Link href="https://en.wikipedia.org/wiki/Numerology" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">this external overview on Wikipedia</Link> or return to our <Link href="/" className="text-primary hover:underline">Angel Number Calculator</Link>.
               </p>
-              <Button size="lg" asChild>
-                <Link href="/">Calculate My Angel Numbers</Link>
-              </Button>
             </section>
           </div>
         </div>
