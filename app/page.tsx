@@ -95,14 +95,14 @@ export default function HomePage() {
               Trusted by 50,000+ spiritual seekers worldwide
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance text-gray-900 leading-tight">
-              Discover Your<br />
+              Free Angel<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                Angel Numbers
+                Number Calculator
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-10 text-balance max-w-3xl mx-auto leading-relaxed">
-              Enter your birthdate and unlock the secret messages your guardian angels have been sending you. 
-              Get <strong>personalized interpretations</strong> for love, career, and spiritual growth — completely free.
+              Use our <strong>free angel number calculator</strong> to discover what messages your guardian angels are sending you. 
+              Enter your birthdate and get <strong>personalized interpretations</strong> for love, career, and spiritual growth.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
