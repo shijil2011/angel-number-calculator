@@ -14,8 +14,6 @@ import { generatePDFReport, downloadAsJSON, ReportStorage } from "@/lib/report-s
 import { useToast } from "@/hooks/use-toast"
 import { Analytics } from "@/lib/analytics"
 
-// ... existing imports
-
 const AffiliateBox = () => (
   <div className="bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 rounded-xl p-6 text-center text-white mb-6 border border-purple-700 shadow-xl">
     <h3 className="text-2xl font-bold mb-3 text-yellow-400 flex items-center justify-center gap-2">
@@ -34,8 +32,8 @@ const AffiliateBox = () => (
 )
 
 interface AngelNumberCalculatorProps {
-// ...
-
+  compact?: boolean
+}
 
 export function AngelNumberCalculator({ compact = false }: AngelNumberCalculatorProps) {
   const [input, setInput] = useState<AngelNumberInput>({
