@@ -15,20 +15,24 @@ import { useToast } from "@/hooks/use-toast"
 import { Analytics } from "@/lib/analytics"
 
 const AffiliateBox = () => (
-  <div className="bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 rounded-xl p-6 text-center text-white mb-6 border border-purple-700 shadow-xl">
-    <h3 className="text-2xl font-bold mb-3 text-yellow-400 flex items-center justify-center gap-2">
-      <Sparkles className="h-6 w-6" /> Get Your Complete Reading <Sparkles className="h-6 w-6" />
-    </h3>
-    <p className="text-lg text-gray-200 mb-6">
-      Unlock your full numerology report with detailed career, relationship & life purpose insights.
-    </p>
-    <Button className="w-full bg-gradient-to-r from-purple-500 to-yellow-600 hover:from-purple-600 hover:to-yellow-700 text-white font-bold py-6 text-lg rounded-full mb-4 shadow-lg transition-transform hover:scale-105">
-      Get My FREE Video Reading Now
-    </Button>
-    <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">
-      Trusted by 2M+ users • Instant access • 100% Free
-    </p>
-  </div>
+  <Card className="mb-6 border-2 border-blue-100 shadow-sm bg-blue-50/50">
+    <CardContent className="p-6 text-center">
+      <h3 className="text-xl font-bold mb-2 text-blue-900 flex items-center justify-center gap-2">
+        <Sparkles className="h-5 w-5 text-blue-600" /> Unlock Your Full Numerology Report
+      </h3>
+      <p className="text-gray-600 mb-6 text-sm">
+        Get detailed career, relationship & life purpose insights with a complete video reading.
+      </p>
+      <Button 
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow transition-transform hover:scale-105"
+        asChild
+      >
+        <a href="https://8b0cb7ww69oefwdewghjses6ay.hop.clickbank.net/?&traffic_source=vercel&traffic_type=organic&campaign=toolresult" target="_blank" rel="noopener noreferrer">
+          Get My FREE Video Reading Now
+        </a>
+      </Button>
+    </CardContent>
+  </Card>
 )
 
 interface AngelNumberCalculatorProps {
