@@ -14,9 +14,28 @@ import { generatePDFReport, downloadAsJSON, ReportStorage } from "@/lib/report-s
 import { useToast } from "@/hooks/use-toast"
 import { Analytics } from "@/lib/analytics"
 
+// ... existing imports
+
+const AffiliateBox = () => (
+  <div className="bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 rounded-xl p-6 text-center text-white mb-6 border border-purple-700 shadow-xl">
+    <h3 className="text-2xl font-bold mb-3 text-yellow-400 flex items-center justify-center gap-2">
+      <Sparkles className="h-6 w-6" /> Get Your Complete Reading <Sparkles className="h-6 w-6" />
+    </h3>
+    <p className="text-lg text-gray-200 mb-6">
+      Unlock your full numerology report with detailed career, relationship & life purpose insights.
+    </p>
+    <Button className="w-full bg-gradient-to-r from-purple-500 to-yellow-600 hover:from-purple-600 hover:to-yellow-700 text-white font-bold py-6 text-lg rounded-full mb-4 shadow-lg transition-transform hover:scale-105">
+      Get My FREE Video Reading Now
+    </Button>
+    <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">
+      Trusted by 2M+ users • Instant access • 100% Free
+    </p>
+  </div>
+)
+
 interface AngelNumberCalculatorProps {
-  compact?: boolean
-}
+// ...
+
 
 export function AngelNumberCalculator({ compact = false }: AngelNumberCalculatorProps) {
   const [input, setInput] = useState<AngelNumberInput>({
@@ -287,6 +306,7 @@ export function AngelNumberCalculator({ compact = false }: AngelNumberCalculator
       {/* Results - Only shown after calculation */}
       {result && (
         <div className="space-y-6">
+          <AffiliateBox />
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Your Angel Numbers</h2>
             <div className="flex items-center gap-2">
