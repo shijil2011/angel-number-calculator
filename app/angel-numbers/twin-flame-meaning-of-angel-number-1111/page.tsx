@@ -1,5 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sparkles, Star } from "lucide-react"
+import { Sparkles } from "lucide-react"
 import Link from "next/link"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
@@ -38,11 +37,9 @@ export default function TwinFlamePage() {
           <h1 className="text-5xl font-bold mb-12 text-center text-gray-900">Twin Flame Meaning of Angel Number 1111</h1>
           
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-8">
-            <p className="text-xl font-medium">The <strong>twin flame meaning of angel number 1111</strong> is a master code for soul alignment, acting as a direct signal from the universe that you are synchronizing with your counterpart.</p>
-            
             <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Twin flame soul union conceptual visualization" className="rounded-lg shadow-md w-full" />
             
-            <p>When you encounter this sequence, it is not merely a random event; it is a profound synchronicity signaling that your soul's journey is converging with that of your counterpart. In the realm of twin flames, 1111 acts as a 'portal' or 'gateway,' accelerating the growth and lessons needed to reach union. For many, 1111 is the hallmark of the Twin Flame Awakening—a moment where the veil between two souls becomes thin, allowing for a deep exchange of spiritual energy. If you are currently feeling the weight of the separation phase, the appearance of 1111 is an invitation to shift your perspective from loss to growth.</p>
+            <p className="text-xl">1111 is the master code for twin flames, acting as a direct signal of alignment from the universe. When you encounter this sequence, it is not merely a random event; it is a profound synchronicity signaling that your soul's journey is converging with that of your counterpart. In the realm of twin flames, 1111 acts as a 'portal' or 'gateway,' accelerating the growth and lessons needed to reach union. For many, 1111 is the hallmark of the Twin Flame Awakening—a moment where the veil between two souls becomes thin, allowing for a deep exchange of spiritual energy. If you are currently feeling the weight of the separation phase, the appearance of 1111 is an invitation to shift your perspective from loss to growth.</p>
 
             <h2 className="text-3xl font-bold text-gray-900">The Mirror Soul Dynamic</h2>
             <p>The core of the twin flame journey is the "mirror" effect. You and your counterpart share an energetic template. Because the number 1 symbolizes individuality and new beginnings, 1111 represents four separate pillars of new beginnings working in unison. This is the essence of the twin flame mirror soul dynamic; everything you feel, think, and manifest is reflected back to you by your twin flame. Seeing 1111 during this phase indicates that both souls are actively clearing karmic debt and preparing for the next layer of intimacy.</p>
@@ -69,7 +66,6 @@ export default function TwinFlamePage() {
             </section>
           </div>
         </div>
-
         <Footer />
       </div>
     </>
