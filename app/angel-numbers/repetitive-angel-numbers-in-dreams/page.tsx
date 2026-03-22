@@ -53,6 +53,7 @@ export default function RepetitiveDreamsPage() {
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Understanding Repetitive Angel Numbers in Dreams</h1>
+            
             <Card className="my-8 bg-primary/5 border-primary/20 text-left">
                 <CardHeader>
                     <CardTitle className="text-lg flex items-center gap-2 text-primary">
