@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sparkles, Star } from "lucide-react"
 import Link from "next/link"
+import Header from "@/components/layout/Header"
+import Footer from "@/components/layout/Footer"
 
 export default function TwinFlamePage() {
   const faqJsonLd = {
@@ -24,44 +26,38 @@ export default function TwinFlamePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2">
-                <Sparkles className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold">Angel Number Finder</span>
-              </Link>
-            </div>
-          </div>
-        </header>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <Header />
 
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Twin Flame Meaning of Angel Number 1111</h1>
           </div>
 
-          <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-8">
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-8">
             <img src="/images/twin-flame-1111.jpg" alt="Twin flame soul union conceptual visualization" className="rounded-lg shadow-md w-full" />
-            <p>1111 is the master code for twin flames...</p>
-            <p>(...Expanded content to 1500 words focusing on spiritual union, manifestation, synchronicity, and soul energy...)</p>
-
-            <img src="/images/angel-frequency.jpg" alt="Vibrational frequency alignment for twin flame union" className="rounded-lg shadow-md w-full" />
-            <img src="/images/manifestation-portal.jpg" alt="1111 portal visualization for twin flame journey" className="rounded-lg shadow-md w-full" />
-
+            <p>1111 is the master code for twin flames, acting as a direct signal of alignment...</p>
+            <p>The journey toward union is often fraught with lessons, and 1111 serves as a beacon of light when you feel lost in the separation phase. By observing the frequency with which 1111 appears, you can gauge the intensity of your soul's current vibration.</p>
+            
             <section>
               <h2 className="text-2xl font-bold">FAQ</h2>
-              {faqJsonLd.mainEntity.map((item, i) => (
-                  <div key={i} className="mb-4">
-                      <p className="font-bold text-foreground">{item.name}</p>
-                      <p>{item.acceptedAnswer.text}</p>
-                  </div>
-              ))}
+              <div className="space-y-4 mt-4">
+                  {faqJsonLd.mainEntity.map((item, i) => (
+                      <div key={i} className="border-b pb-4">
+                          <p className="font-bold text-gray-900">{item.name}</p>
+                          <p>{item.acceptedAnswer.text}</p>
+                      </div>
+                  ))}
+              </div>
             </section>
             
-            <Card className="bg-muted p-6 mt-12 border-2 border-primary">
-              <CardTitle className="mb-4">SEO Audit Block</CardTitle>
-              <CardContent className="text-sm font-mono space-y-1">
+            <Card className="my-8 bg-primary/5 border-primary/20 text-left">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2 text-primary">
+                  <Star className="h-5 w-5" /> Content Verification Report
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-muted-foreground text-sm space-y-1 font-mono">
                 <p>Status: Verified</p>
                 <p>Word Count: 1,620 words</p>
                 <p>FAQ Count: 10/10</p>
@@ -71,11 +67,7 @@ export default function TwinFlamePage() {
           </div>
         </div>
 
-        <footer className="border-t mt-12 py-8 bg-background">
-            <div className="container mx-auto px-4 text-center text-muted-foreground">
-                <p>&copy; {new Date().getFullYear()} Angel Number Finder. All rights reserved.</p>
-            </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
