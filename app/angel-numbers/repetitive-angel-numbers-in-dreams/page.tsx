@@ -39,6 +39,7 @@ export default function RepetitiveDreamsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        {/* Consistent Header */}
         <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
@@ -53,7 +54,6 @@ export default function RepetitiveDreamsPage() {
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Understanding Repetitive Angel Numbers in Dreams</h1>
-            
             <Card className="my-8 bg-primary/5 border-primary/20 text-left">
                 <CardHeader>
                     <CardTitle className="text-lg flex items-center gap-2 text-primary">
@@ -109,6 +109,13 @@ export default function RepetitiveDreamsPage() {
             <img src="/images/angel-number-dream.jpg" alt="Angel number sequence glowing in dream space" className="rounded-lg shadow-md w-full" />
           </div>
         </div>
+
+        {/* Consistent Footer */}
+        <footer className="border-t mt-12 py-8 bg-background">
+            <div className="container mx-auto px-4 text-center text-muted-foreground">
+                <p>&copy; {new Date().getFullYear()} Angel Number Finder. All rights reserved.</p>
+            </div>
+        </footer>
       </div>
     </>
   );
