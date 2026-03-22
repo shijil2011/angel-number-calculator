@@ -1,11 +1,9 @@
-import React from 'react';
-import Head from 'next/head';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, Star, BookOpen } from "lucide-react";
-import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Sparkles, Star } from "lucide-react"
+import Link from "next/link"
 
 export default function RepetitiveDreamsPage() {
-  const faqSchema = {
+  const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
@@ -38,11 +36,7 @@ export default function RepetitiveDreamsPage() {
 
   return (
     <>
-      <Head>
-        <title>Understanding Repetitive Angel Numbers in Dreams | Spiritual Guide</title>
-        <meta name="description" content="Explore the subconscious symbolism, angel number frequencies, and spiritual grounding behind seeing angel numbers in dreams. 1500+ word comprehensive guide." />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      </Head>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
         <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -59,7 +53,18 @@ export default function RepetitiveDreamsPage() {
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Understanding Repetitive Angel Numbers in Dreams</h1>
-            <p className="text-xl text-muted-foreground mb-6">Unlocking the subconscious symbolism, frequencies, and spiritual grounding of dream-state angelic communication.</p>
+            <Card className="my-8 bg-primary/5 border-primary/20 text-left">
+                <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2 text-primary">
+                    <Star className="h-5 w-5" /> Key Takeaways
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="text-muted-foreground text-sm space-y-2">
+                    <p>• Dreams provide a lowered-barrier state for divine communication.</p>
+                    <p>• Repetitive numbers in sleep are not accidental; they are precise signals.</p>
+                    <p>• Tracking patterns in a dream journal is essential for decryption.</p>
+                </CardContent>
+            </Card>
           </div>
 
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-8">
@@ -73,26 +78,13 @@ export default function RepetitiveDreamsPage() {
               <p>Repetition is the universal language of the divine. In your dream state, your cognitive barriers are lowered, allowing the specific vibrational frequencies of angel numbers to penetrate your psyche. Whether you see 111, 222, 333, or 444, each sequence acts as a unique data packet sent from the spiritual realm.</p>
             </section>
 
-            <Card className="my-8 bg-primary/5 border-primary/20 text-left">
-                <CardHeader>
-                    <CardTitle className="text-lg flex items-center gap-2 text-primary">
-                    <Star className="h-5 w-5" /> Key Takeaways
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground text-sm space-y-2">
-                    <p>• Dreams provide a lowered-barrier state for divine communication.</p>
-                    <p>• Repetitive numbers in sleep are not accidental; they are precise signals.</p>
-                    <p>• Tracking patterns in a dream journal is essential for decryption.</p>
-                </CardContent>
-            </Card>
-
             <section>
               <h2 className="text-3xl font-bold text-foreground">Deciphering the Frequency</h2>
               <p>To interpret these repetitive symbols, we must treat the dream as an encrypted message. The human brain processes symbolic information faster than linguistic information, which is why your guardian angels use numbers—they are pure, non-linguistic data points that the subconscious processes instantly. By examining the context of the dream, you can decode these sequences.</p>
               
               <img src="/images/spiritual-grounding.jpg" alt="Spiritual grounding techniques for dream interpretation" className="rounded-lg shadow-md w-full" />
               
-              <p className="mt-6">Detailed exploration follows here... (The content is structured to expand to 1500+ words covering dream psychology, specific number interpretations in dream states, the Twin Flame connection in dreams, and the practicalities of a dream journal for spiritual growth).</p>
+              <p className="mt-6">When you wake up from a dream featuring repetitive numbers, pause. Record the emotion you felt. Was it anxiety? Peace? Excitement? The emotion acts as the key to the frequency. If you saw 111 during a time of career stress, the angel number is likely a sign of alignment—a push to follow your intuition in that professional endeavor. Over weeks, your dream journal will reveal a pattern of guidance that is uniquely tuned to your spiritual journey.</p>
             </section>
 
             <section>
