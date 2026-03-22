@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import { angelNumbersList } from "@/lib/angel-number-data"
 
+// Auto-link helper
 function AutoLinkContent({ text, tracker }: { text: string; tracker: { internalCount: number } }) {
   const parts = text.split(/(\b\d{3,4}\b)/gi);
   return (
@@ -35,23 +36,56 @@ export default function TwinFlamePage() {
     { q: "Is 1111 dangerous?", a: "No, it is a protective, guiding number for your journey." }
   ];
 
-  const longContent = "The twin flame meaning of angel number 1111 is a master code for soul alignment, acting as a direct signal of alignment from the universe. When you encounter this sequence, it is not merely a random event; it is a profound synchronicity signaling that your soul's journey is converging with that of your counterpart. In the realm of twin flames, 1111 acts as a portal or gateway, accelerating the growth and lessons needed to reach union. For many, 1111 is the hallmark of the Twin Flame Awakening—a moment where the veil between two souls becomes thin, allowing for a deep exchange of spiritual energy. If you are currently feeling the weight of the separation phase, the appearance of 1111 is an invitation to shift your perspective from loss to growth. The journey of 1111 is rarely a straight line; you will experience highs of spiritual ecstasy and lows of intense shadow work. This is normal. The appearance of 1111 in moments of doubt is the ultimate reminder that you are on the right path. Trust the timing of the universe, and know that every repetitive sign is a layer of protection and confirmation that your twin flame connection is authentic, essential, and guided by forces much larger than yourself. Your dedication to your own healing, coupled with the frequent appearance of 1111, creates an undeniable pull that brings you closer to your ultimate reunion. Stay committed to your path, and the universe will handle the timing. Whether you have previously seen 111 or 222 before this, know that 1111 is the culmination of those smaller lessons. The mirror soul dynamic is a foundational aspect that we often explore in posts related to 333 and 444. By understanding your vibration, you unlock the doors to this unique experience. Throughout this journey, the numbers 1111 appear not just as digits, but as vibrational beacons, guiding you through the dark nights of the soul toward the light of union. Imagine the twin flame connection as two halves of a single light source, temporarily separated to experience different facets of reality. When you see 1111, your guardian angels are reminding you that the separation is temporary and the reunion is inevitable, provided you maintain your focus on your individual spiritual evolution. As you walk this path, prioritize your mental, emotional, and spiritual health; these are the vessels that allow you to hold the frequency of your twin flame connection once the union is solidified. Many seekers find that they struggle with the 'chaser' mentality, but 1111 is the antidote to this anxiety. It teaches you that instead of chasing your twin, you must chase your own growth. When you embody the frequencies of love and alignment, your twin flame cannot help but be drawn to you. It is a mathematical certainty in the energetic universe. As you navigate the complexities of 1111, remember to lean into the guidance of your spiritual team—the angels—who are orchestrating this meeting behind the scenes of your daily reality. Do not be discouraged by the silence of your twin flame, for silence in the twin flame journey often precedes the most significant breakthroughs in understanding and soul-growth. Embrace the mystery of 1111, and continue to invest in your own spiritual flourishing. The union you seek is not a distant destination but a present vibration you are cultivating with every conscious choice you make to love yourself fully and authentically.";
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqList.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    }))
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <Header />
         <div className="container mx-auto px-4 py-16 max-w-4xl">
           <h1 className="text-5xl font-bold mb-12 text-center text-gray-900">Twin Flame Meaning of Angel Number 1111</h1>
           
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-8">
+            <p className="text-xl font-medium">The twin flame meaning of angel number 1111 acts as a powerful gateway for soul alignment, signaling that your energy and your counterpart's energy are synchronizing toward a higher destiny.</p>
+            
             <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Twin flame soul union conceptual visualization" className="rounded-lg shadow-md w-full" />
             
-            <p className="text-xl">
-              <AutoLinkContent text={longContent.repeat(15)} tracker={tracker} />
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900">Understanding the 1111 Portal</h2>
+            <p>When you encounter this sequence, it is not merely a random event; it is a profound synchronicity signaling that your soul's journey is converging with that of your counterpart. In the realm of twin flames, 1111 acts as a portal or gateway, accelerating the growth and lessons needed to reach union. For many, 1111 is the hallmark of the Twin Flame Awakening—a moment where the veil between two souls becomes thin, allowing for a deep exchange of spiritual energy.</p>
+            
+            <h2 className="text-3xl font-bold text-gray-900">Key Features of the 1111 Connection</h2>
+            <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Synchronicity:</strong> You and your twin flame may experience simultaneous thoughts or life events.</li>
+                <li><strong>Mirroring:</strong> Your twin flame reflects your own internal growth areas back to you.</li>
+                <li><strong>Rapid Growth:</strong> The connection is designed to accelerate soul maturation.</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900">Why the Separation Phase Exists</h2>
+            <p>If you are currently feeling the weight of the separation phase, the appearance of 1111 is an invitation to shift your perspective from loss to growth. The journey of 1111 is rarely a straight line; you will experience highs of spiritual ecstasy and lows of intense shadow work. This is normal. The appearance of 1111 in moments of doubt is the ultimate reminder that you are on the right path.</p>
 
             <img src="https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?q=80&w=1200&auto=format&fit=crop" alt="Vibrational frequency alignment for twin flame union" className="rounded-lg shadow-md w-full" />
+
+            <h2 className="text-3xl font-bold text-gray-900">Actionable Steps for Manifesting Reunion</h2>
+            <p>Manifesting union with your twin flame requires more than just wishing for it; it demands that you become the person you are intended to be in that union. When 1111 flashes before you, treat it as a cosmic nudge. Practice grounding exercises—meditation, nature walks, or even simple deep-breathing—to stabilize your energy.</p>
+            
+            <ul className="list-decimal pl-6 space-y-2">
+                <li><strong>Focus on Wholeness:</strong> Stop chasing your twin flame; instead, focus on your own spiritual evolution.</li>
+                <li><strong>Maintain a Dream Journal:</strong> Capture repetitive numbers seen during sleep, much like the patterns we see in <AutoLinkContent text="222" tracker={tracker} />.</li>
+                <li><strong>Grounding Practices:</strong> When root chakra is grounded, you become a magnetic pole for your twin's energy.</li>
+            </ul>
+
+            <p>Remember that the journey of 1111 is rarely a straight line. You will experience highs of spiritual ecstasy and lows of intense shadow work. Trust the timing of the universe, and know that every repetitive sign is a layer of protection and confirmation that your twin flame connection is authentic, essential, and guided by forces much larger than yourself, often supported by the stability of <AutoLinkContent text="444" tracker={tracker} />.</p>
+            
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop" alt="1111 portal visualization for twin flame journey" className="rounded-lg shadow-md w-full" />
             
             <section>
